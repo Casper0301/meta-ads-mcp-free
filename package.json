@@ -1,0 +1,27 @@
+{
+  "name": "meta-ads-mcp-free",
+  "version": "1.0.0",
+  "description": "Free MCP server for Meta/Facebook Ads — read your ad account data with AI",
+  "type": "module",
+  "main": "build/index.js",
+  "bin": {
+    "meta-ads-mcp-free": "build/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node build/index.js"
+  },
+  "keywords": ["mcp", "meta", "facebook", "ads", "marketing", "api", "ai"],
+  "author": "Casper Schive",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}
