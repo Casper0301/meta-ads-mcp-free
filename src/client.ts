@@ -104,4 +104,38 @@ export class MetaAdsClient {
   ): Promise<T> {
     return this.get<T>(`/${objectId}/insights`, params);
   }
+
+  async post<T = unknown>(
+    path: string,
+    body: Record<string, string | number | boolean>
+  ): Promise<T> {
+    const url = new URL(`${GRAPH_API_BASE}${path}`);
+    url.searchParams.set("access_token", this.token);
+
+    await this.throttle();
+
+    const formBody = new URLSearchParams();
+    for (const [key, value] of Object.entries(body)) {
+      formBody.set(key, String(value));
+    }
+
+    const response = await fetch(url.toString(), {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: formBody.toString(),
+    });
+
+    if (!response.ok) {
+      const text = await response.text();
+      let errorCode: number | undefined;
+      try {
+        const parsed = JSON.parse(text);
+        errorCode = parsed?.error?.code;
+      } catch {}
+      throw new MetaApiError(response.status, response.statusText, text, errorCode);
+    }
+
+    const data = (await response.json()) as T;
+    return data;
+  }
 }
