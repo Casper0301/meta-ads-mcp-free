@@ -2,6 +2,7 @@ export interface AdAccount {
   id: string;
   name: string;
   type: "lead_gen" | "ecommerce";
+  email: string | null;
 }
 
 export const ACCOUNTS: Record<string, AdAccount> = {
@@ -9,30 +10,35 @@ export const ACCOUNTS: Record<string, AdAccount> = {
     id: "act_14246673",
     name: "Naka Autosport",
     type: "lead_gen",
+    email: "espen@naka.no",
   },
   act_996950670679944: {
     id: "act_996950670679944",
     name: "Stjørdal Autosalg",
     type: "lead_gen",
+    email: "post@stjordal-autosalg.no",
   },
   act_753487635197711: {
     id: "act_753487635197711",
     name: "Aasen Auto",
     type: "lead_gen",
+    email: "post@aasenauto.no",
   },
   act_3929508630480150: {
     id: "act_3929508630480150",
     name: "Hanebrekke Service",
     type: "lead_gen",
+    email: "fredrik.hanebrekke@gmail.com",
   },
   act_703535410118805: {
     id: "act_703535410118805",
     name: "Polyalkemi",
     type: "ecommerce",
+    email: null,
   },
 };
 
-export const LEAD_ACTION_TYPES = ["lead"];
+export const LEAD_ACTION_TYPES = ["lead", "lead_grouped", "lead_grouped_total"];
 
 export function getAccountName(accountId: string): string {
   return ACCOUNTS[accountId]?.name ?? accountId;
